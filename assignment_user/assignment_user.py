@@ -15,6 +15,7 @@ class User:
         print(self.age)
         print(self.is_rewards_member)
         print(self.gold_card_points)
+        return self
 
     def enroll(self):
         if(self.is_rewards_member == True):
@@ -22,6 +23,8 @@ class User:
         else:
             self.is_rewards_member = True
             self.gold_card_points = 200
+        
+        return self
 
     def spend_points(self, amount):
         if (amount <= self.gold_card_points):
@@ -29,9 +32,11 @@ class User:
             print(f"Balance Left: {self.gold_card_points}")
         else:
             print("Not enough points!")
+        
+        return self
 
 
-test_user = User("Joe", "Smith", "joe_smith@gmail.com", 9)
+test_user = User("Joe", "Smith", "joe_smith@gmail.com", 43)
 test_user.display()
 
 # User will now be Enrolled, with 200 Gold Card points
@@ -43,3 +48,8 @@ print(" ")
 test_user.spend_points(25)
 print(test_user.gold_card_points) # Will output: 175
 test_user.spend_points(176)
+print(" ")
+
+# Chained Methods:
+test_user2 = User("Jane", "DoLittle", "janeDoLittle@gmail.com", 37)
+test_user2.spend_points(75).enroll().spend_points(75).enroll().display()
